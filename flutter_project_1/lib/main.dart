@@ -17,6 +17,7 @@ class MyAppState extends State<MyApp> {
   var questionIndex = 0;
   
   void answerQuestion() {
+    // setState는 build 메서드를 호출하고 build 메서드는 위젯트리를 다시 빌드한다
     setState(() {
       questionIndex = questionIndex + 1;
     });
