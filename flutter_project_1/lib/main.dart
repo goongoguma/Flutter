@@ -7,21 +7,22 @@ class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
 // State is persistent
 // <MyApp>은 MyAppState가 MyApp 클래스에 속해있다고 알려주는 포인터
-class MyAppState extends State<MyApp> {
-  var questionIndex = 0;
+// private 클래스로 만들어주기 위해서 _를 붙이는것이 관례
+class _MyAppState extends State<MyApp> {
+  var _questionIndex = 0;
   
   void answerQuestion() {
     // setState는 build 메서드를 호출하고 build 메서드는 위젯트리를 다시 빌드한다
     setState(() {
-      questionIndex = questionIndex + 1;
+      _questionIndex = _questionIndex + 1;
     });
-    print(questionIndex);
+    print(_questionIndex);
   }
   // @override 데코레이터는 StatelessWidget에 의해 제공된 build 메서드를 override 했다고 명시하기 위해 사용한것. 통상적으로 쓰임
   @override
@@ -35,7 +36,7 @@ class MyAppState extends State<MyApp> {
     return MaterialApp(home: Scaffold(
       appBar: AppBar(title: Text('My FIrst App'),),
       body: Column(children: [
-        Text(questions[questionIndex]), 
+        Text(questions[_questionIndex]), 
         RaisedButton(child: Text('Answer 1'), onPressed: answerQuestion),
         RaisedButton(child: Text('Answer 2'), onPressed: () => print('Answer 2 chosen!')),
         RaisedButton(child: Text('Answer 3'), onPressed: () {
