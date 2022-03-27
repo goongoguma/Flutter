@@ -2,11 +2,24 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+// when the external data changes, StatefulWidget can be recreated
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyAppState();
+  }
+}
+
+// State is persistent
+// <MyApp>은 MyAppState가 MyApp 클래스에 속해있다고 알려주는 포인터
+class MyAppState extends State<MyApp> {
   var questionIndex = 0;
   
   void answerQuestion() {
-    questionIndex = questionIndex + 1;
+    setState(() {
+      questionIndex = questionIndex + 1;
+    });
     print(questionIndex);
   }
   // @override 데코레이터는 StatelessWidget에 의해 제공된 build 메서드를 override 했다고 명시하기 위해 사용한것. 통상적으로 쓰임
