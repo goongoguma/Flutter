@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './question.dart';
+
 void main() => runApp(MyApp());
 
 // when the external data changes, StatefulWidget can be recreated
@@ -17,7 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
   
-  void answerQuestion() {
+  void _answerQuestion() {
     // setState는 build 메서드를 호출하고 build 메서드는 위젯트리를 다시 빌드한다
     setState(() {
       _questionIndex = _questionIndex + 1;
@@ -36,8 +38,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(home: Scaffold(
       appBar: AppBar(title: Text('My FIrst App'),),
       body: Column(children: [
-        Text(questions[_questionIndex]), 
-        RaisedButton(child: Text('Answer 1'), onPressed: answerQuestion),
+        Question(questions[_questionIndex]), 
+        RaisedButton(child: Text('Answer 1'), onPressed: _answerQuestion),
         RaisedButton(child: Text('Answer 2'), onPressed: () => print('Answer 2 chosen!')),
         RaisedButton(child: Text('Answer 3'), onPressed: () {
           print('Answer 3 chosen!');
