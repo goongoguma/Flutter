@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
 class Question extends StatelessWidget {
-  // StatelessWidget에서 변할 수 있는 값 앞에 final 사용
   final String questionText;
 
   Question(this.questionText);
 
   @override
   Widget build(BuildContext context) {
-    return Text(questionText);
+      // TextAlign은 enum값임
+      return Container(
+        width: double.infinity,
+        margin: EdgeInsets.all(10),
+        child: Text(
+        questionText, 
+        style: TextStyle(fontSize: 28), 
+        textAlign: TextAlign.center
+      )
+    );
   }
 }
