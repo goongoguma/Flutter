@@ -21,8 +21,19 @@ class MyApp extends StatefulWidget {
 // private 클래스로 만들어주기 위해서 _를 붙이는것이 관례
 class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
+
+  // const -> compile time constant value 
+  // 이미 값이 고정되어있음
+  static const questions = [
+    {'questionText': 'What\'s is your favorite color?', 'answers': ['black', 'red', 'green', 'white', 'blue']}, 
+    {'questionText': 'What\'s your favorite animal?', 'answers': ['tiger','lion', 'ox', 'snake', 'rhino']},
+    {'questionText': 'What\'s your favorite food?', 'answers': ['김치', '갈비', '초밥', '치킨', '순대국']},
+  ];
   
   void _answerQuestion() {
+    if (_questionIndex < questions.length) {
+      print('we have more questions');
+    }
     // setState는 build 메서드를 호출하고 build 메서드는 위젯트리를 다시 빌드한다
     setState(() {
       _questionIndex = _questionIndex + 1;
@@ -33,13 +44,6 @@ class _MyAppState extends State<MyApp> {
   @override
   // build 메서드를 사용해 MaterialApp 위젯을 리턴하고 context에서 위젯 트리에서의 위치 정보를 확인할 수 있다
   Widget build(BuildContext context) {
-    // const -> compile time constant value 
-    // 이미 값이 고정되어있음
-    const questions = [
-      {'questionText': 'What\'s is your favorite color?', 'answers': ['black', 'red', 'green', 'white', 'blue']}, 
-      {'questionText': 'What\'s your favorite animal?', 'answers': ['tiger','lion', 'ox', 'snake', 'rhino']},
-      {'questionText': 'What\'s your favorite food?', 'answers': ['김치', '갈비', '초밥', '치킨', '순대국']},
-    ];
     // MaterialApp, Text도 build 메서드를 가지고 있는 클래스다. 생성자를 사용해 Hello 텍스트를 보여주고 있는것
     // return MaterialApp(home: Text('Hello!'),);
 
