@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Question extends StatelessWidget {
+  // final -> run time constant value
+  // 코드가 실행될때 final 값을 고정한다
   final String questionText;
 
   Question(this.questionText);
@@ -14,7 +16,7 @@ class Question extends StatelessWidget {
         child: Text(
         questionText, 
         style: TextStyle(fontSize: 28), 
-        textAlign: TextAlign.center
+        textAlign: TextAlign.center,
       )
     );
   }

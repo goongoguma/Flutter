@@ -33,7 +33,9 @@ class _MyAppState extends State<MyApp> {
   @override
   // build 메서드를 사용해 MaterialApp 위젯을 리턴하고 context에서 위젯 트리에서의 위치 정보를 확인할 수 있다
   Widget build(BuildContext context) {
-    var questions = [
+    // const -> compile time constant value 
+    // 이미 값이 고정되어있음
+    const questions = [
       {'questionText': 'What\'s is your favorite color?', 'answers': ['black', 'red', 'green', 'white', 'blue']}, 
       {'questionText': 'What\'s your favorite animal?', 'answers': ['tiger','lion', 'ox', 'snake', 'rhino']},
       {'questionText': 'What\'s your favorite food?', 'answers': ['김치', '갈비', '초밥', '치킨', '순대국']},
@@ -43,9 +45,9 @@ class _MyAppState extends State<MyApp> {
 
     // Scaffold를 사용해서 앱에서 사용할 기본 디자인을 생성한다
     return MaterialApp(home: Scaffold(
-      appBar: AppBar(title: Text('My FIrst App'),),
+      appBar: AppBar(title: Text('My First App'),),
       body: Column(children: [
-        Question(questions[_questionIndex]['questionText']), 
+        Question( questions[_questionIndex]['questionText']), 
         ...(questions[_questionIndex]['answers'] as List<String>).map((answer) {
           return Answer(_answerQuestion, answer);
         }).toList()
