@@ -1,6 +1,4 @@
-<!-- Xcode는 open -a Simulator.app명령어로 실행 -->
-
-# flutter_project_1
+# flutter_project_2_my_expenses
 
 A new Flutter project.
 
