@@ -17,7 +17,7 @@ class NewTransacitons extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children:<Widget>[
           TextField(decoration: InputDecoration(labelText: 'Title'), controller: titleController,), 
-          TextField(decoration: InputDecoration(labelText: 'Amoun'), controller: amountController,),
+          TextField(decoration: InputDecoration(labelText: 'Amount'), controller: amountController,),
           FlatButton(onPressed: (){ addTx(titleController.text, double.parse(amountController.text)); }, child: Text('Add Transaction'), textColor: Colors.purple,)
         ]
         )
