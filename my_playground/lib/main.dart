@@ -1,67 +1,58 @@
 import 'package:flutter/material.dart';
-import 'quesitons.dart';
-import 'answers.dart';
-import 'myTitle.dart';
-import 'lastPage.dart';
+import './transaction.dart';
 
-void main() => runApp(Main());
+void main() => runApp(MyApp());
 
-class Main extends StatefulWidget {
-  const Main({Key? key}) : super(key: key);
-
-  @override
-  _MainState createState() => _MainState();
-}
-
-class _MainState extends State<Main> {
-
-  int _counter = 0;
-  static const _data = [
-    {
-      'question': 'What\'s is your favorite movie',
-      'answers': [
-        {'text': 'spiderman', 'score': 9},
-        {'text': 'ironman', 'score': 10},
-        {'text': 'thor', 'score': 3},
-        {'text': 'joker', 'score': 8},
-        {'text': 'superman', 'score': 7.5}
-      ]
-    },
-    {
-      'question': 'Who\'s is your favorite person',
-      'answers': [
-        {'text': 'jaehyun', 'score': 10},
-        {'text': 'gildong', 'score': 5},
-        {'text': 'donggil', 'score': 6},
-        {'text': 'woochi', 'score': 9},
-        {'text': 'younggu', 'score': 4.7}
-      ]
-    }
-  ];
-
-  void onClickButton() {
-    setState(() {
-        _counter = _counter + 1;
-      });
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold( 
-        appBar: AppBar(
-        title: const Text('My Playground'),
-        backgroundColor: Colors.redAccent,
-        centerTitle: true,
+      title: 'Flutter App',
+      home: MyHomePage(),
+    );
+  }
+}
+
+class MyHomePage extends StatelessWidget {
+  final List<Transaction> transactions = [
+    Transaction(id: 'id1', title: '운동화', amount: 45000, date: DateTime.now()),
+    Transaction(id: 'id2', title: '핸드폰', amount: 130000, date: DateTime.now()),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Flutter App')
       ),
-      body: _counter <= _data.length - 1 ? Column(children: [
-        MyTitle(),
-        Questions(_data[_counter]['question'] as String), 
-        ...(_data[_counter]['answers'] as List<Map<String, Object>>).map((answer) {
-          return Answers(onClickButton, answer['text'] as String);
-        })
-      ],) : LastPage()
-      )
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // Column에서 Card의 넓이나 높이를 조절하고 싶으면 Container로 감싸야함
+          // 대신 Column안에 있는 아이템들의 위치는 조절 가능
+          Container(
+            width: double.infinity,
+            child: Card(
+              color: Colors.blue,
+              child: Text('CHART!'),
+              elevation: 5,
+            )
+          ),
+          Column(children: transactions.map((tx) {
+            return Container(child: 
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+              Container(child: Text(tx.amount.toString()),),
+              Column(children: [
+                Container(child: Text(tx.title, style: TextStyle(color: Colors.deepPurpleAccent))),
+                Container(child: Text(tx.amount.toString(), style: TextStyle(color: Colors.deepOrange),))
+              ]
+            )]) );
+          }).toList())
+        ],
+      ),
     );
   }
 }
