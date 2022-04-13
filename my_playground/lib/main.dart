@@ -25,7 +25,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Flutter App')),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Column에서 Card의 넓이나 높이를 조절하고 싶으면 Container로 감싸야함
@@ -37,6 +37,20 @@ class MyHomePage extends StatelessWidget {
                 child: Text('CHART!'),
                 elevation: 5,
               )),
+          Card(
+            elevation: 10,
+            child: Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(decoration: InputDecoration(labelText: 'Title'),),
+                  TextField(decoration: InputDecoration(labelText: 'Price'),),
+                  FlatButton(onPressed: () {}, child: Text('Add Item'), textColor: Colors.pink,)
+                ],
+              ),
+            ),
+          ),
           Container(
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.indigoAccent, width: 3)),
