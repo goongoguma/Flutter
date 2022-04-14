@@ -19,6 +19,10 @@ class MyHomePage extends StatelessWidget {
     Transaction(id: 't1', title: '맥북', amount: 19.99, date: DateTime.now()),
     Transaction(id: 't2', title: '아이폰', amount: 25.99, date: DateTime.now()),
   ];
+  // String titleInput;
+  // String amountInput;
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,18 +42,33 @@ class MyHomePage extends StatelessWidget {
                 elevation: 5,
               )),
           Card(
-            elevation: 5,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-              TextField(decoration: InputDecoration(labelText: 'Title')),
-              TextField(decoration: InputDecoration(labelText: 'Amount')),
-              FlatButton(onPressed: () {}, child: Text('Add Transaction'), textColor: Colors.purple),
-            ]),
-            )
-          ),
+              elevation: 5,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(labelText: 'Title'),
+                        controller: titleController,
+                        // onChanged: (val) {
+                        //   titleInput = val;
+                        // },
+                      ),
+                      TextField(
+                        decoration: InputDecoration(labelText: 'Amount'),
+                        controller: amountController,
+                        // onChanged: (val) => amountInput = val
+                      ),
+                      FlatButton(
+                          onPressed: () {
+                            print(titleController.text);
+                            print(amountController.text);
+                          },
+                          child: Text('Add Transaction'),
+                          textColor: Colors.purple),
+                    ]),
+              )),
           Column(
               children: transactions.map((tx) {
             return Card(
