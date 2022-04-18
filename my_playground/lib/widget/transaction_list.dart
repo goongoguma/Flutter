@@ -13,14 +13,14 @@ class TransactionList extends StatelessWidget {
         height: 400,
         decoration: BoxDecoration(
             border: Border.all(color: Colors.indigoAccent, width: 3)),
-        child: SingleChildScrollView(
-          child: Column(
-              children: transactions.map((tx) {
+        child: ListView.builder(
+          itemCount: transactions.length,
+          itemBuilder: (ctx, index) {
             return Container(
               child: Row(children: [
                 Container(
                     child: Text(
-                      '\₩${tx.amount}',
+                      '\₩${transactions[index].amount}',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
@@ -29,12 +29,12 @@ class TransactionList extends StatelessWidget {
                     padding: EdgeInsets.all(10)),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Container(
-                      child: Text(tx.title,
+                      child: Text(transactions[index].title,
                           style: TextStyle(color: Colors.deepPurpleAccent))),
                   Container(
                       margin: EdgeInsets.only(top: 5),
                       child: Text(
-                        DateFormat('yyyy-MM-dd').format(tx.date),
+                        DateFormat('yyyy-MM-dd').format(transactions[index].date),
                         style: TextStyle(color: Colors.deepOrange),
                       ))
                 ])
@@ -43,7 +43,7 @@ class TransactionList extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.deepPurple, width: 2)),
             );
-          }).toList()),
+          },
         ));
   }
 }

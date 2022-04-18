@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'widget/user_transaction.dart';
+// What is the difference between SingleChildScrollView ListView and ListView builder?
+// https://stackoverflow.com/questions/62146197/what-is-the-difference-between-listview-and-singlechildscrollview-in-flutter#:~:text=SingleChildScrollView%3A%20is%20used%20when%20we%20have%20different%20widgets%20for%20n%20elements.&text=ListView()%20%2D%2D%20Render%20all,visible%20items%20on%20the%20screen.
 
 void main() => runApp(MyApp());
 
