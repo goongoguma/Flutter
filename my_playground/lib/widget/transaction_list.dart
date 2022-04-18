@@ -9,9 +9,11 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return         Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.indigoAccent, width: 3)),
+    return Container(
+        height: 400,
+        decoration: BoxDecoration(
+            border: Border.all(color: Colors.indigoAccent, width: 3)),
+        child: SingleChildScrollView(
           child: Column(
               children: transactions.map((tx) {
             return Container(
@@ -42,6 +44,6 @@ class TransactionList extends StatelessWidget {
                   border: Border.all(color: Colors.deepPurple, width: 2)),
             );
           }).toList()),
-        );
+        ));
   }
 }
