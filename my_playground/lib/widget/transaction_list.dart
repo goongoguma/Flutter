@@ -24,18 +24,18 @@ class TransactionList extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
-                          color: Colors.green),
+                          color: Theme.of(context).primaryColor),
                     ),
                     padding: EdgeInsets.all(10)),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Container(
                       child: Text(transactions[index].title,
-                          style: TextStyle(color: Colors.deepPurpleAccent))),
+                          style: Theme.of(context).textTheme.headline6)),
                   Container(
                       margin: EdgeInsets.only(top: 5),
                       child: Text(
                         DateFormat('yyyy-MM-dd').format(transactions[index].date),
-                        style: TextStyle(color: Colors.deepOrange),
+                        style: TextStyle(color: Theme.of(context).errorColor),
                       ))
                 ])
               ]),
