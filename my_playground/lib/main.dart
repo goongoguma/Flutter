@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/widget/transaction_list.dart';
 import 'model/transaction.dart';
 import 'widget/transaction_form.dart';
+import 'widget/chart.dart';
 // What is the difference between SingleChildScrollView ListView and ListView builder?
 // https://stackoverflow.com/questions/62146197/what-is-the-difference-between-listview-and-singlechildscrollview-in-flutter#:~:text=SingleChildScrollView%3A%20is%20used%20when%20we%20have%20different%20widgets%20for%20n%20elements.&text=ListView()%20%2D%2D%20Render%20all,visible%20items%20on%20the%20screen.
 
@@ -40,10 +41,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> transactions = [
-    Transaction(id: 'id1', title: '운동화', amount: 45000, date: DateTime.now()),
-    Transaction(id: 'id2', title: '핸드폰', amount: 130000, date: DateTime.now()),
-  ];
+  final List<Transaction> transactions = [];
+
+  List<Transaction> get _recentTransactions {
+    return transactions.where((tx) {
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   void _addTransactions(String title, double amount) {
     final newItem = Transaction(
@@ -89,13 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             // Column에서 Card의 넓이나 높이를 조절하고 싶으면 Container로 감싸야함
             // 대신 Column안에 있는 아이템들의 위치는 조절 가능
-            Container(
-                width: double.infinity,
-                child: Card(
-                  color: Colors.blue,
-                  child: Text('CHART!'),
-                  elevation: 5,
-                )),
+            Chart(_recentTransactions),
             TransactionList(transactions)
           ],
         ),
