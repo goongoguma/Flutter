@@ -16,10 +16,13 @@ class _TransactionFormState extends State<TransactionForm> {
   DateTime _selectedDate;
 
   void _submitTransaction() {
+    if (_selectedDate == null) {
+      return;
+    }
     final enteredTitle = _titleController.text;
     final enteredAmount = double.parse(_amountController.text);
 
-    if (enteredTitle.isNotEmpty || enteredAmount > 0 || _selectedDate != null) {
+    if (enteredTitle.isNotEmpty || enteredAmount > 0) {
       widget.addTransactions(enteredTitle, enteredAmount, _selectedDate);
       Navigator.of(context).pop();
       return;

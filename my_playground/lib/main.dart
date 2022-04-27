@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
         accentColor: Colors.brown,
+        errorColor: Colors.deepOrange,
         fontFamily: 'Quicksand',
         textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
@@ -42,10 +43,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> transactions = [];
+  final List<Transaction> _transactions = [];
 
   List<Transaction> get _recentTransactions {
-    return transactions.where((tx) {
+    return _transactions.where((tx) {
       return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
     }).toList();
   }
@@ -58,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
         date: selectedDate);
 
     setState(() {
-      transactions.add(newItem);
+      _transactions.add(newItem);
     });
   }
 
@@ -72,6 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
             behavior: HitTestBehavior.opaque,
           );
         });
+  }
+
+  void _deleteTransaction(String id) {
+    setState((() => _transactions.removeWhere((tx) => tx.id == id)));
   }
 
   @override
@@ -93,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // Column에서 Card의 넓이나 높이를 조절하고 싶으면 Container로 감싸야함
             // 대신 Column안에 있는 아이템들의 위치는 조절 가능
             Chart(_recentTransactions),
-            TransactionList(transactions)
+            TransactionList(_transactions, _deleteTransaction)
           ],
         ),
       ),
