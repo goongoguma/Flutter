@@ -17,37 +17,20 @@ class TransactionList extends StatelessWidget {
             ? ListView.builder(
                 itemCount: transactions.length,
                 itemBuilder: (ctx, index) {
-                  return Container(
-                    child: Row(children: [
-                      Container(
-                          child: Text(
-                            '\₩${transactions[index].amount.toStringAsFixed(0)}',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                                color: Theme.of(context).primaryColor),
-                          ),
-                          padding: EdgeInsets.all(10)),
-                      Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                                child: Text(transactions[index].title,
-                                    style:
-                                        Theme.of(context).textTheme.headline6)),
-                            Container(
-                                margin: EdgeInsets.only(top: 5),
-                                child: Text(
-                                  DateFormat('yyyy-MM-dd')
-                                      .format(transactions[index].date),
-                                  style: TextStyle(
-                                      color: Theme.of(context).errorColor),
-                                ))
-                          ])
-                    ]),
-                    margin: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.deepPurple, width: 2)),
+                  return Card(
+                    elevation: 5,
+                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        child: Padding(
+                          padding: EdgeInsets.all(6),
+                          child: FittedBox(child: Text('\$${transactions[index].amount}'),),
+                        ),
+                      ),
+                      title: Text(transactions[index].title, style: Theme.of(context).textTheme.headline6,),
+                      subtitle: Text(DateFormat.yMMMMd().format(transactions[index].date)),
+                    )
                   );
                 },
               )
