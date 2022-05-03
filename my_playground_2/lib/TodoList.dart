@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import './ToDo.dart';
 
 class TodoList extends StatelessWidget {
+  final String id;
   final String title;
   final String description;
+  final DateTime date;
+  final Function deleteTodo;
 
-  TodoList(this.title, this.description);
+  TodoList(this.id, this.title, this.description, this.date, this.deleteTodo);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,6 @@ class TodoList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.all(5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -35,7 +38,6 @@ class TodoList extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -52,16 +54,30 @@ class TodoList extends StatelessWidget {
                   ],
                 ),
               ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      child: Text('Date: ',
+                          style: Theme.of(context).textTheme.headline5),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(5),
+                      child: Text(DateFormat.yMMMMd().format(date),
+                          style: Theme.of(context).textTheme.subtitle1),
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
         Container(
           padding: EdgeInsets.all(5),
           child: IconButton(
-              onPressed: () {
-                print('delete');
-              },
-              icon: Icon(Icons.dangerous)),
+              onPressed: () => deleteTodo(id), icon: Icon(Icons.dangerous)),
         )
       ],
     ));

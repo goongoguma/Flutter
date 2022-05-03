@@ -40,9 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _addNewTodo(String todoTitle, String todoDesc) {
     final newTodo = Todo(
+      id: DateTime.now().toString(),
       title: todoTitle,
       description: todoDesc,
-      id: DateTime.now().toString(),
       date: DateTime.now(),
     );
     setState(() {
@@ -62,6 +62,12 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  void _deleteTodo(String id) {
+    setState(() {
+      _itemList.removeWhere((el) => el.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,11 +83,10 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: BoxDecoration(color: Colors.amber),
               child: Text('Graph Section'),
             ),
-            // TodoForm(_addNewTodo),
             const SizedBox(
               height: 20,
             ),
-            TodoMenu(_itemList)
+            TodoMenu(_itemList, _deleteTodo)
           ],
         ),
       ),

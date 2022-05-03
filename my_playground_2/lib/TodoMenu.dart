@@ -4,8 +4,9 @@ import 'TodoList.dart';
 
 class TodoMenu extends StatelessWidget {
   final List<Todo> itemList;
+  final Function deleteTodo;
 
-  TodoMenu(this.itemList);
+  TodoMenu(this.itemList, this.deleteTodo);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,11 @@ class TodoMenu extends StatelessWidget {
                     itemCount: itemList.length,
                     itemBuilder: (context, index) {
                       return TodoList(
-                          itemList[index].title, itemList[index].description);
+                          itemList[index].id,
+                          itemList[index].title,
+                          itemList[index].description,
+                          itemList[index].date,
+                          deleteTodo);
                     }),
               ));
   }
