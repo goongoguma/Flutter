@@ -41,18 +41,20 @@ class TransactionList extends StatelessWidget {
                   ));
             },
           )
-        : Column(
-            children: [
-              Text('No Transactions added yet!'),
-              SizedBox(height: 30),
-              Container(
-                height: 200,
-                child: Image.asset(
-                  'assets/images/waiting.png',
-                  fit: BoxFit.cover,
-                ),
-              )
-            ],
-          );
+        : LayoutBuilder(builder: ((context, constraints) {
+            return Column(
+              children: [
+                Text('No Transactions added yet!'),
+                SizedBox(height: 30),
+                Container(
+                  height: constraints.maxHeight * 0.7,
+                  child: Image.asset(
+                    'assets/images/waiting.png',
+                    fit: BoxFit.cover,
+                  ),
+                )
+              ],
+            );
+          }));
   }
 }
