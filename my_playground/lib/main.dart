@@ -82,6 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final isLandScape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final _appBar = AppBar(
       title: Text('Flutter App'),
       actions: [
@@ -90,6 +92,12 @@ class _MyHomePageState extends State<MyHomePage> {
             icon: Icon(Icons.add))
       ],
     );
+    final transactionWidget = Container(
+        height: (MediaQuery.of(context).size.height -
+                _appBar.preferredSize.height -
+                MediaQuery.of(context).padding.top) *
+            0.7,
+        child: TransactionList(_transactions, _deleteTransaction));
     return Scaffold(
       appBar: _appBar,
       body: SingleChildScrollView(
@@ -97,31 +105,37 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text('Show Chart'),
-              Switch(
-                value: _showChart,
-                onChanged: (val) {
-                  setState(() {
-                    _showChart = val;
-                  });
-                },
+            if (isLandScape)
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text('Show Chart'),
+                Switch(
+                  value: _showChart,
+                  onChanged: (val) {
+                    setState(() {
+                      _showChart = val;
+                    });
+                  },
+                ),
+              ]),
+            if (isLandScape)
+              _showChart
+                  ? Container(
+                      height: (MediaQuery.of(context).size.height -
+                              _appBar.preferredSize.height -
+                              MediaQuery.of(context).padding.top) *
+                          0.7,
+                      child: Chart(_recentTransactions),
+                    )
+                  : transactionWidget,
+            if (!isLandScape)
+              Container(
+                height: (MediaQuery.of(context).size.height -
+                        _appBar.preferredSize.height -
+                        MediaQuery.of(context).padding.top) *
+                    0.3,
+                child: Chart(_recentTransactions),
               ),
-            ]),
-            _showChart
-                ? Container(
-                    height: (MediaQuery.of(context).size.height -
-                            _appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
-                        0.7,
-                    child: Chart(_recentTransactions),
-                  )
-                : Container(
-                    height: (MediaQuery.of(context).size.height -
-                            _appBar.preferredSize.height -
-                            MediaQuery.of(context).padding.top) *
-                        0.7,
-                    child: TransactionList(_transactions, _deleteTransaction))
+            if (!isLandScape) transactionWidget
           ],
         ),
       ),
