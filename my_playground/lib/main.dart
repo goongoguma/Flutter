@@ -91,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ? CupertinoNavigationBar(
             middle: Text('Flutter App IOS'),
             trailing: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 GestureDetector(
                   child: Icon(CupertinoIcons.add),
@@ -158,12 +159,10 @@ class _MyHomePageState extends State<MyHomePage> {
             body: _pageBody,
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerFloat,
-            floatingActionButton: Platform.isIOS
-                ? Container()
-                : FloatingActionButton(
-                    child: Icon(Icons.add),
-                    onPressed: () => _startAddNewTransactionModal(context),
-                  ),
+            floatingActionButton: FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () => _startAddNewTransactionModal(context),
+            ),
           )
         : CupertinoPageScaffold(
             child: _pageBody,
