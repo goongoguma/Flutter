@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/widget/transaction_list.dart';
 import 'model/transaction.dart';
@@ -109,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
             if (isLandScape)
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text('Show Chart'),
-                Switch(
+                Switch.adaptive(
                   value: _showChart,
                   onChanged: (val) {
                     setState(() {
@@ -141,10 +142,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransactionModal(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () => _startAddNewTransactionModal(context),
+            ),
     );
   }
 }
