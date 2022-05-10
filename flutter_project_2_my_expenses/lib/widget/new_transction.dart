@@ -65,7 +65,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 bottom: MediaQuery.of(context).viewInsets.bottom + 10),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-              CupertinoTextField(),
+              // CupertinoTextField(),
               TextField(
                 decoration: InputDecoration(labelText: 'Title'),
                 controller: _titleController,
