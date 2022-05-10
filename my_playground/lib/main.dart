@@ -165,8 +165,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           )
         : CupertinoPageScaffold(
-            child: _pageBody,
             navigationBar: _appBar,
+            child: _pageBody,
           );
   }
 }
