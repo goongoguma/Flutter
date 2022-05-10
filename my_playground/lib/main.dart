@@ -114,14 +114,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 mediaQuery.padding.top) *
             0.7,
         child: TransactionList(_transactions, _deleteTransaction));
-    final _pageBody = SingleChildScrollView(
+    final _pageBody = SafeArea(
+        child: SingleChildScrollView(
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (isLandScape)
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text('Show Chart'),
+              Text(
+                'Show Chart',
+                style: Theme.of(context).textTheme.headline6,
+              ),
               Switch.adaptive(
                 value: _showChart,
                 onChanged: (val) {
@@ -152,7 +156,7 @@ class _MyHomePageState extends State<MyHomePage> {
           if (!isLandScape) transactionWidget
         ],
       ),
-    );
+    ));
     return Platform.isAndroid
         ? Scaffold(
             appBar: _appBar,
