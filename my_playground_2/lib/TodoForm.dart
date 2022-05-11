@@ -13,16 +13,16 @@ class TodoForm extends StatefulWidget {
 
 class _TodoFormState extends State<TodoForm> {
   final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
+  final _amountController = TextEditingController();
   DateTime? _date;
 
   void _onClickSubmit() {
-    if (_titleController.text.isEmpty ||
-        _descriptionController.text.isEmpty ||
-        _date == null) {
+    final enteredAmount = double.parse(_amountController.text);
+    print(enteredAmount);
+    if (_titleController.text.isEmpty || enteredAmount < 0 || _date == null) {
       return;
     }
-    widget.addNewTodo(_titleController.text, _descriptionController.text);
+    widget.addNewTodo(_titleController.text, enteredAmount);
 
     Navigator.of(context).pop();
   }
@@ -57,8 +57,9 @@ class _TodoFormState extends State<TodoForm> {
                   onSubmitted: (_) => _onClickSubmit(),
                 ),
                 TextField(
-                  decoration: InputDecoration(labelText: 'Description'),
-                  controller: _descriptionController,
+                  decoration: InputDecoration(labelText: 'Amount'),
+                  controller: _amountController,
+                  keyboardType: TextInputType.number,
                   onSubmitted: (_) => _onClickSubmit(),
                 ),
                 Container(

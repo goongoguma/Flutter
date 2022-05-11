@@ -5,11 +5,11 @@ import './ToDo.dart';
 class TodoList extends StatelessWidget {
   final String id;
   final String title;
-  final String description;
+  final double amount;
   final DateTime date;
   final Function deleteTodo;
 
-  TodoList(this.id, this.title, this.description, this.date, this.deleteTodo);
+  TodoList(this.id, this.title, this.amount, this.date, this.deleteTodo);
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +43,12 @@ class TodoList extends StatelessWidget {
                   children: [
                     Container(
                       padding: EdgeInsets.all(5),
-                      child: Text('Description: ',
+                      child: Text('Amount: ',
                           style: Theme.of(context).textTheme.headline5),
                     ),
                     Container(
                       padding: EdgeInsets.all(5),
-                      child: Text(description,
+                      child: Text('\$${amount}',
                           style: Theme.of(context).textTheme.subtitle1),
                     )
                   ],

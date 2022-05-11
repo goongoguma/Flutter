@@ -26,7 +26,7 @@ class TodoMenu extends StatelessWidget {
                       return TodoList(
                           itemList[index].id,
                           itemList[index].title,
-                          itemList[index].description,
+                          itemList[index].amount,
                           itemList[index].date,
                           deleteTodo);
                     }),
