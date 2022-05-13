@@ -3,6 +3,7 @@ import 'ToDo.dart';
 import './TodoList.dart';
 import './TodoForm.dart';
 import './TodoMenu.dart';
+import './chart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -77,12 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Column(
           children: <Widget>[
-            Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(color: Colors.amber),
-              child: Text('Graph Section'),
-            ),
+            Chart(_itemList),
             const SizedBox(
               height: 20,
             ),
