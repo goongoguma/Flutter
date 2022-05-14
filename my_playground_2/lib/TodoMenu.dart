@@ -12,7 +12,6 @@ class TodoMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 550,
-        // decoration: BoxDecoration(color: Colors.white),
         child: itemList.isEmpty
             ? LayoutBuilder(builder: ((context, constraints) {
                 return Container(

@@ -6,6 +6,8 @@ import './TodoMenu.dart';
 import './chart.dart';
 import './toggle_switch.dart';
 
+// https://github.com/goongoguma/Flutter/commit/b6c4f3a44e951a5bf1938898a3854a9bf40d79c9
+// 여기서부터 시작하면 됨
 void main() {
   runApp(const MyApp());
 }
@@ -88,7 +90,21 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             ToggleSwitch(_itemList, isToggled, _onChangeToggle),
-            isToggled ? Chart(_itemList) : TodoMenu(_itemList, _deleteTodo)
+            isToggled
+                ? Container(
+                    child: Chart(_itemList),
+                    height: (MediaQuery.of(context).size.height -
+                            appBar.preferredSize.height -
+                            // MediaQuery.of(context).padding.top -> 상단 상태 표시줄 높이
+                            MediaQuery.of(context).padding.top) *
+                        0.4,
+                  )
+                : Container(
+                    child: TodoMenu(_itemList, _deleteTodo),
+                    height: (MediaQuery.of(context).size.height -
+                            appBar.preferredSize.height -
+                            MediaQuery.of(context).padding.top) *
+                        0.6)
           ],
         ),
       ),
