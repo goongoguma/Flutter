@@ -10,20 +10,25 @@ class Chart extends StatelessWidget {
   List<Map<String, Object>> get _transactionByDay {
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(Duration(days: index));
-      double sum = 0;
+      double total = 0;
 
       for (var i = 0; i < itemList.length; i++) {
         if (itemList[i].date.day == weekDay.day &&
             itemList[i].date.month == weekDay.month &&
             itemList[i].date.year == weekDay.year) {
-          sum += itemList[i].amount;
+          total += itemList[i].amount;
         }
       }
-
       return {
+        'total': total,
         'day': DateFormat.E().format(weekDay),
-        'amount': sum,
       };
+    }).reversed.toList();
+  }
+
+  double get totalSum {
+    return _transactionByDay.fold(0, (previousValue, element) {
+      return previousValue + (element['total'] as double);
     });
   }
 
@@ -39,13 +44,7 @@ class Chart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _transactionByDay.map((data) {
               return Column(
-                children: [
-                  Container(
-                    child: Text('chart'),
-                  ),
-                  SizedBox(height: 5),
-                  ChartItem()
-                ],
+                children: [ChartItem(data, totalSum)],
               );
             }).toList()),
       ),

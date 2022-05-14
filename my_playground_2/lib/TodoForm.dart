@@ -18,11 +18,10 @@ class _TodoFormState extends State<TodoForm> {
 
   void _onClickSubmit() {
     final enteredAmount = double.parse(_amountController.text);
-    print(enteredAmount);
     if (_titleController.text.isEmpty || enteredAmount < 0 || _date == null) {
       return;
     }
-    widget.addNewTodo(_titleController.text, enteredAmount);
+    widget.addNewTodo(_titleController.text, enteredAmount, _date);
 
     Navigator.of(context).pop();
   }

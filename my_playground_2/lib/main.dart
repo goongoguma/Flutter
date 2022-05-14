@@ -39,12 +39,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<Todo> _itemList = [];
 
-  void _addNewTodo(String todoTitle, double amount) {
+  void _addNewTodo(String todoTitle, double amount, DateTime date) {
     final newTodo = Todo(
       id: DateTime.now().toString(),
       title: todoTitle,
       amount: amount,
-      date: DateTime.now(),
+      date: date,
     );
     setState(() {
       _itemList.add(newTodo);
