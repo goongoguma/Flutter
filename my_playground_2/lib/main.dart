@@ -4,6 +4,7 @@ import './TodoList.dart';
 import './TodoForm.dart';
 import './TodoMenu.dart';
 import './chart.dart';
+import './toggle_switch.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,6 +39,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Todo> _itemList = [];
+  bool isToggled = false;
 
   void _addNewTodo(String todoTitle, double amount, DateTime date) {
     final newTodo = Todo(
@@ -69,24 +71,31 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _onChangeToggle(value) {
+    setState(() {
+      isToggled = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: Text('My Playground'),
+    );
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My Playground'),
-      ),
+      appBar: appBar,
       body: Center(
         child: Column(
           children: <Widget>[
-            Chart(_itemList),
-            TodoMenu(_itemList, _deleteTodo)
+            ToggleSwitch(_itemList, isToggled, _onChangeToggle),
+            isToggled ? Chart(_itemList) : TodoMenu(_itemList, _deleteTodo)
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(
           Icons.design_services_rounded,
-          color: Colors.indigo,
+          color: Colors.black,
           size: 30,
         ),
         onPressed: () => _startNewTodo(context),

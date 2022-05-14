@@ -12,11 +12,14 @@ class TodoMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         height: 550,
-        decoration: BoxDecoration(color: Colors.indigo),
+        // decoration: BoxDecoration(color: Colors.white),
         child: itemList.isEmpty
-            ? Container(
-                child: Text('There is nothing else to do',
-                    style: TextStyle(color: Theme.of(context).errorColor)))
+            ? LayoutBuilder(builder: ((context, constraints) {
+                return Container(
+                    height: constraints.maxHeight * 0.6,
+                    child: Text('There is nothing else to do',
+                        style: TextStyle(color: Theme.of(context).errorColor)));
+              }))
             : Container(
                 padding:
                     EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
