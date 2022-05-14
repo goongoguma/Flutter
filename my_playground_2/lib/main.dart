@@ -79,9 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: <Widget>[
             Chart(_itemList),
-            const SizedBox(
-              height: 20,
-            ),
             TodoMenu(_itemList, _deleteTodo)
           ],
         ),
