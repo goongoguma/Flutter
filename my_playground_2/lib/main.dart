@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'ToDo.dart';
 import './TodoList.dart';
@@ -81,69 +84,92 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final appBar = AppBar(
-      title: Text('My Playground'),
-      actions: [
-        IconButton(
-            onPressed: () => _startNewTodo(context),
-            icon: const Icon(Icons.add_box_outlined))
-      ],
-    );
+    final PreferredSizeWidget appBar = (Platform.isIOS
+        ? CupertinoNavigationBar(
+            middle: Text('My IOS Playground'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                    child: Icon(CupertinoIcons.add_circled_solid),
+                    onTap: () => _startNewTodo(context))
+              ],
+            ),
+          )
+        : AppBar(
+            title: Text('My Playground'),
+            actions: [
+              IconButton(
+                  onPressed: () => _startNewTodo(context),
+                  icon: const Icon(Icons.add_box_outlined))
+            ],
+          )) as PreferredSizeWidget;
     final isLandScape =
         MediaQuery.of(context).orientation == Orientation.landscape;
-    final pageBody = Center(
-        child: isLandScape
-            ? Column(
-                children: [
-                  ToggleSwitch(_itemList, isToggled, _onChangeToggle),
-                  isToggled
-                      ? Container(
-                          child: Chart(_itemList),
-                          height: (MediaQuery.of(context).size.height -
-                                  appBar.preferredSize.height -
-                                  // MediaQuery.of(context).padding.top -> 상단 상태 표시줄 높이
-                                  MediaQuery.of(context).padding.top) *
-                              0.4,
-                        )
-                      : Container(
+    final pageBody = SafeArea(
+        child: Center(
+            child: isLandScape
+                ? Column(
+                    children: [
+                      ToggleSwitch(_itemList, isToggled, _onChangeToggle),
+                      isToggled
+                          ? Container(
+                              child: Chart(_itemList),
+                              height: (MediaQuery.of(context).size.height -
+                                      appBar.preferredSize.height -
+                                      // MediaQuery.of(context).padding.top -> 상단 상태 표시줄 높이
+                                      MediaQuery.of(context).padding.top) *
+                                  0.4,
+                            )
+                          : Container(
+                              child: TodoMenu(_itemList, _deleteTodo),
+                              height: (MediaQuery.of(context).size.height -
+                                      appBar.preferredSize.height -
+                                      MediaQuery.of(context).padding.top) *
+                                  0.6)
+                    ],
+                  )
+                : Column(
+                    children: [
+                      Container(
+                        child: Chart(_itemList),
+                        height: (MediaQuery.of(context).size.height -
+                                appBar.preferredSize.height -
+                                // MediaQuery.of(context).padding.top -> 상단 상태 표시줄 높이
+                                MediaQuery.of(context).padding.top) *
+                            0.4,
+                      ),
+                      Container(
                           child: TodoMenu(_itemList, _deleteTodo),
                           height: (MediaQuery.of(context).size.height -
                                   appBar.preferredSize.height -
                                   MediaQuery.of(context).padding.top) *
                               0.6)
-                ],
-              )
-            : Column(
-                children: [
-                  Container(
-                    child: Chart(_itemList),
-                    height: (MediaQuery.of(context).size.height -
-                            appBar.preferredSize.height -
-                            // MediaQuery.of(context).padding.top -> 상단 상태 표시줄 높이
-                            MediaQuery.of(context).padding.top) *
-                        0.4,
+                    ],
+                  )));
+    return Platform.isIOS
+        ? CupertinoPageScaffold(
+            child: pageBody,
+            navigationBar: appBar as ObstructingPreferredSizeWidget)
+        : Scaffold(
+            appBar: appBar,
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: pageBody,
+              ),
+            ),
+            floatingActionButton: Platform.isIOS
+                ? Container()
+                : FloatingActionButton(
+                    child: const Icon(
+                      Icons.design_services_rounded,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                    onPressed: () => _startNewTodo(context),
                   ),
-                  Container(
-                      child: TodoMenu(_itemList, _deleteTodo),
-                      height: (MediaQuery.of(context).size.height -
-                              appBar.preferredSize.height -
-                              MediaQuery.of(context).padding.top) *
-                          0.6)
-                ],
-              ));
-    return Scaffold(
-      appBar: appBar,
-      body: pageBody,
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(
-          Icons.design_services_rounded,
-          color: Colors.black,
-          size: 30,
-        ),
-        onPressed: () => _startNewTodo(context),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation
-          .centerFloat, // This trailing comma makes auto-formatting nicer for build methods.
-    );
+            floatingActionButtonLocation: FloatingActionButtonLocation
+                .centerFloat, // This trailing comma makes auto-formatting nicer for build methods.
+          );
   }
 }

@@ -48,39 +48,47 @@ class _TodoFormState extends State<TodoForm> {
         width: double.infinity,
         child: Card(
             elevation: 10,
-            child: Column(
-              children: [
-                TextField(
-                  decoration: InputDecoration(labelText: 'Title'),
-                  controller: _titleController,
-                  onSubmitted: (_) => _onClickSubmit(),
-                ),
-                TextField(
-                  decoration: InputDecoration(labelText: 'Amount'),
-                  controller: _amountController,
-                  keyboardType: TextInputType.number,
-                  onSubmitted: (_) => _onClickSubmit(),
-                ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(_date == null
-                          ? 'Choose the date'
-                          : DateFormat.yMMMMd().format(_date!)),
-                      ElevatedButton(
-                          onPressed: _presentDatePicker,
-                          child: Text('Pick Calendar'))
-                    ],
+            child: Container(
+              padding: EdgeInsets.only(
+                  top: 10,
+                  left: 10,
+                  right: 10,
+                  bottom: MediaQuery.of(context).viewInsets.bottom + 10),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Title'),
+                    controller: _titleController,
+                    onSubmitted: (_) => _onClickSubmit(),
                   ),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                      primary: Colors.white, backgroundColor: Colors.blueGrey),
-                  child: Text('Submit'),
-                  onPressed: _onClickSubmit,
-                )
-              ],
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Amount'),
+                    controller: _amountController,
+                    keyboardType: TextInputType.number,
+                    onSubmitted: (_) => _onClickSubmit(),
+                  ),
+                  Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(_date == null
+                            ? 'Choose the date'
+                            : DateFormat.yMMMMd().format(_date!)),
+                        ElevatedButton(
+                            onPressed: _presentDatePicker,
+                            child: Text('Pick Calendar'))
+                      ],
+                    ),
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        primary: Colors.white,
+                        backgroundColor: Colors.blueGrey),
+                    child: Text('Submit'),
+                    onPressed: _onClickSubmit,
+                  )
+                ],
+              ),
             )));
   }
 }

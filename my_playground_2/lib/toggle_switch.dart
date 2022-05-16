@@ -15,8 +15,7 @@ class ToggleSwitch extends StatefulWidget {
 class _ToggleSwitchState extends State<ToggleSwitch> {
   @override
   Widget build(BuildContext context) {
-    print(widget.isToggled);
-    return Switch(
+    return Switch.adaptive(
       value: widget.isToggled,
       onChanged: widget.itemList.isEmpty
           ? null
