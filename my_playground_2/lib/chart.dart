@@ -43,9 +43,8 @@ class Chart extends StatelessWidget {
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _transactionByDay.map((data) {
-              return Column(
-                children: [ChartItem(data, totalSum)],
-              );
+              return Flexible(
+                  fit: FlexFit.tight, child: ChartItem(data, totalSum));
             }).toList()),
       ),
     );

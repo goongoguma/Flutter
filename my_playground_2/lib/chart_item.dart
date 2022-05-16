@@ -8,34 +8,46 @@ class ChartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print((data['total'] as double) / totalSum);
-    return Column(children: [
-      Container(
-        child: Text(data['day'] as String),
-      ),
-      SizedBox(height: 5),
-      Container(
-          height: 40,
-          width: 10,
-          child: Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.purple, width: 1),
-                    color: Color.fromRGBO(220, 220, 220, 1),
-                    borderRadius: BorderRadius.circular(10)),
-              ),
-              FractionallySizedBox(
-                heightFactor: (data['total'] as double) / totalSum,
-                child: Container(
+    return LayoutBuilder(builder: (context, constraints) {
+      return Column(children: [
+        Container(
+          height: constraints.maxHeight * 0.15,
+          child: Text(data['day'] as String),
+        ),
+        SizedBox(height: constraints.maxHeight * 0.05),
+        Container(
+            height: constraints.maxHeight * 0.6,
+            width: 10,
+            child: Stack(
+              children: [
+                Container(
                   decoration: BoxDecoration(
-                      color: Theme.of(context).primaryColor,
-                      // color: Colors.deepOrange,
+                      border: Border.all(color: Colors.purple, width: 1),
+                      color: Color.fromRGBO(220, 220, 220, 1),
                       borderRadius: BorderRadius.circular(10)),
                 ),
-              )
-            ],
-          ))
-    ]);
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FractionallySizedBox(
+                    heightFactor: (data['total'] as double) / totalSum,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColor,
+                          // color: Colors.deepOrange,
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                  ),
+                )
+              ],
+            )),
+        SizedBox(
+          height: constraints.maxHeight * 0.05,
+        ),
+        Container(
+          height: constraints.maxHeight * 0.15,
+          child: Text('\$${data['total']}'),
+        ),
+      ]);
+    });
   }
 }
