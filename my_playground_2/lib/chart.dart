@@ -36,7 +36,7 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-      height: 100,
+      height: 20,
       width: double.infinity,
       decoration: BoxDecoration(color: Colors.amber),
       child: Card(

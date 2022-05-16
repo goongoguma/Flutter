@@ -29,7 +29,10 @@ class ChartItem extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: FractionallySizedBox(
-                    heightFactor: (data['total'] as double) / totalSum,
+                    // heightFactor: (data['total'] as double) / totalSum,
+                    heightFactor: totalSum == 0
+                        ? 0
+                        : (data['total'] as double) / totalSum,
                     child: Container(
                       decoration: BoxDecoration(
                           color: Theme.of(context).primaryColor,
