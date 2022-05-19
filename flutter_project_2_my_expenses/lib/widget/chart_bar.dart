@@ -5,10 +5,13 @@ class ChartBar extends StatelessWidget {
   final double spendingAmount;
   final double spendingPctOfTotal;
 
-  ChartBar(this.label, this.spendingAmount, this.spendingPctOfTotal);
+  // every instance of this class is immutable, you cannot change it
+  // ex. ChartBar().label = 'hello' (X)
+  const ChartBar(this.label, this.spendingAmount, this.spendingPctOfTotal);
 
   @override
   Widget build(BuildContext context) {
+    print('build my chart bar');
     return LayoutBuilder(builder: (context, constraints) {
       return Column(
         children: [
