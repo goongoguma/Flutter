@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', // default is '/,
       routes: {
         CategoryMealsScreen.routeName: (ctx) => CategoryMealsScreen(),
-        // MealDetailScreen.routeName: (ctx) => MealDetailScreen()
+        MealDetailScreen.routeName: (ctx) => MealDetailScreen()
       },
       // onGenerateROute는 동적인 라우팅 설정시 유용함
       onGenerateRoute: (settings) {
@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         // } else if (settings.name == '/something-else') {
         //   return...
         // }
-        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+        // return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
       },
       // onUnkownRoute는 flutter가 라우팅에 실패했을때 라우팅 설정
       onUnknownRoute: (settings) {
