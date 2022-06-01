@@ -3,6 +3,7 @@ import 'package:my_playground3/category_meals_screen.dart';
 import './tabs_screen.dart';
 import './categories_screen.dart';
 import './meal_detail_screen.dart';
+import './filter_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => TabsScreen(),
         CategoryMealsScreen.routeName: (context) => CategoryMealsScreen(),
         MealDetailScreen.routeName: (context) => MealDetailScreen(),
+        FilterScreen.routeName: (context) => FilterScreen()
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (ctx) => CategoriesScreen());

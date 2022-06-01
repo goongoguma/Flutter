@@ -1,32 +1,54 @@
 import 'package:flutter/material.dart';
 import './dummy_data.dart';
 import './meal_item.dart';
+import 'models/meal.dart';
 
-class CategoryMealsScreen extends StatelessWidget {
+class CategoryMealsScreen extends StatefulWidget {
   static const routeName = '/category-meals';
 
   @override
-  Widget build(BuildContext context) {
+  State<CategoryMealsScreen> createState() => _CategoryMealsScreenState();
+}
+
+class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
+  late String categoryTitle;
+  late List<Meal> displayedMeals;
+
+  @override
+  void didChangeDependencies() {
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, String>;
-    final title = routeArgs['title'];
+    categoryTitle = routeArgs['title'] as String;
     final id = routeArgs['id'];
-    final meals = DUMMY_MEALS.where((meal) {
+    displayedMeals = DUMMY_MEALS.where((meal) {
       return meal.categories.contains(id);
     }).toList();
+    super.didChangeDependencies();
+  }
+
+  void _removeMeal(String mealId) {
+    setState(() {
+      displayedMeals.removeWhere((element) => element.id == mealId);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(title as String)),
+        appBar: AppBar(title: Text(categoryTitle as String)),
         body: ListView.builder(
           itemBuilder: (context, index) {
             return MealItem(
-                id: meals[index].id,
-                title: meals[index].title,
-                imageUrl: meals[index].imageUrl,
-                duration: meals[index].duration,
-                affordability: meals[index].affordability,
-                complexity: meals[index].complexity);
+              id: displayedMeals[index].id,
+              title: displayedMeals[index].title,
+              imageUrl: displayedMeals[index].imageUrl,
+              duration: displayedMeals[index].duration,
+              affordability: displayedMeals[index].affordability,
+              complexity: displayedMeals[index].complexity,
+              removeItem: _removeMeal,
+            );
           },
-          itemCount: meals.length,
+          itemCount: displayedMeals.length,
         ));
   }
 }
