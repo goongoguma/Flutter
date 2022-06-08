@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_playground4/widgets/grid_item_detail_list.dart';
 import './dummy/dummy.dart';
 import './widgets/grid_item.dart';
 
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
             brightness: Brightness.dark),
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      routes: {GridItemDetailList.routeName: (context) => GridItemDetailList()},
     );
   }
 }

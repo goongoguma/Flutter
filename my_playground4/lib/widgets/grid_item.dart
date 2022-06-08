@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'grid_item_detail_list.dart';
 
 class GridItem extends StatelessWidget {
   final String id;
@@ -7,10 +8,15 @@ class GridItem extends StatelessWidget {
 
   GridItem(this.id, this.title, this.color);
 
+  void onClickItem(BuildContext context) {
+    Navigator.of(context).pushNamed(GridItemDetailList.routeName,
+        arguments: {'id': id, 'title': title, 'color': color});
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () => onClickItem(context),
       splashColor: Theme.of(context).colorScheme.tertiary,
       borderRadius: BorderRadius.circular(20),
       child: Container(
