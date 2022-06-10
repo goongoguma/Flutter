@@ -11,24 +11,38 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
+  final List<Map<String, dynamic>> _pages = [
+    {'page': Home(), 'title': 'Home'},
+    {'page': Favorites(), 'title': 'Favorites'}
+  ];
+
+  int _selectedPage = 0;
+
+  void _onChangePages(int index) {
+    setState(() {
+      _selectedPage = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: 2,
-        initialIndex: 0,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Meals'),
-            bottom: const TabBar(tabs: [
-              Tab(
-                  icon: Icon(
-                    Icons.home,
-                  ),
-                  text: 'Home'),
-              Tab(icon: Icon(Icons.star), text: 'Favorites')
-            ]),
-          ),
-          body: TabBarView(children: [Home(), Favorites()]),
-        ));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(_pages[_selectedPage]['title']),
+      ),
+      body: _pages[_selectedPage]['page'],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: _onChangePages,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        selectedItemColor: Colors.orange,
+        unselectedItemColor: Colors.white,
+        currentIndex: _selectedPage,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Favorites')
+        ],
+      ),
+    );
   }
 }

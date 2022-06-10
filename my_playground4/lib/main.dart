@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My Playground 4',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.red)
-            .copyWith(secondary: Colors.green),
         canvasColor: Color.fromARGB(249, 220, 224, 220),
         // brightness: Brightness.dark),
-      ),
+      ).copyWith(
+          colorScheme: ThemeData().colorScheme.copyWith(
+              primary: Colors.deepOrange, secondary: Colors.orangeAccent)),
       initialRoute: '/',
       routes: {
         '/': (context) => Tabs(),
