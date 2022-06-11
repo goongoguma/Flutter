@@ -32,9 +32,8 @@ class _GridItemDetailListState extends State<GridItemDetailList> {
     final routeProps =
         ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
     return Scaffold(
-      appBar: AppBar(title: Text(routeProps['title'] as String)),
-      body: ListView.builder(itemBuilder: ((context, index) {
-        return ListView.builder(
+        appBar: AppBar(title: Text(routeProps['title'] as String)),
+        body: ListView.builder(
           itemBuilder: (context, index) {
             return GridItemDetail(
               id: _filteredMeals[index].id,
@@ -46,8 +45,6 @@ class _GridItemDetailListState extends State<GridItemDetailList> {
             );
           },
           itemCount: _filteredMeals.length,
-        );
-      })),
-    );
+        ));
   }
 }
