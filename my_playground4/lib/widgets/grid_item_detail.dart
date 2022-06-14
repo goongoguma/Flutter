@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_playground4/widgets/grid_item.dart';
 import '../models/meal.dart';
+import '../widgets/grid_item_detail_item.dart';
 
 class GridItemDetail extends StatelessWidget {
   final String id;
@@ -45,8 +45,9 @@ class GridItemDetail extends StatelessWidget {
     }
   }
 
-  void onClickMeal(String title) {
-    print(title);
+  void onClickMeal(BuildContext context) {
+    Navigator.of(context)
+        .pushNamed(GridItemDetailItem.routeName, arguments: id);
   }
 
   @override
@@ -59,7 +60,7 @@ class GridItemDetail extends StatelessWidget {
     );
 
     return InkWell(
-      onTap: () => onClickMeal(title),
+      onTap: () => onClickMeal(context),
       child: Card(
           shape: const RoundedRectangleBorder(borderRadius: staticBorderRadius),
           margin: const EdgeInsets.all(10),

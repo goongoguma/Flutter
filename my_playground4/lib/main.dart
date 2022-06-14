@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_playground4/widgets/grid_item_detail_item.dart';
 import 'package:my_playground4/widgets/grid_item_detail_list.dart';
 import 'package:my_playground4/widgets/tabs.dart';
 
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Tabs(),
-        GridItemDetailList.routeName: (context) => GridItemDetailList()
+        GridItemDetailList.routeName: (context) => GridItemDetailList(),
+        GridItemDetailItem.routeName: (context) => GridItemDetailItem()
       },
     );
   }
