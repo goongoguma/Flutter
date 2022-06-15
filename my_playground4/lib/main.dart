@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_playground4/widgets/favorites.dart';
 import 'package:my_playground4/widgets/grid_item_detail_item.dart';
 import 'package:my_playground4/widgets/grid_item_detail_list.dart';
 import 'package:my_playground4/widgets/tabs.dart';
+import './widgets/filter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +25,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => Tabs(),
         GridItemDetailList.routeName: (context) => GridItemDetailList(),
-        GridItemDetailItem.routeName: (context) => GridItemDetailItem()
+        GridItemDetailItem.routeName: (context) => GridItemDetailItem(),
+        Filter.routeName: (context) => Filter(),
       },
     );
   }

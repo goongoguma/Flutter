@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_playground4/widgets/grid_item.dart';
 import 'package:my_playground4/widgets/home.dart';
 import '../widgets/favorites.dart';
+import './side_menu.dart';
 
 class Tabs extends StatefulWidget {
   const Tabs({Key? key}) : super(key: key);
@@ -30,6 +31,7 @@ class _TabsState extends State<Tabs> {
       appBar: AppBar(
         title: Text(_pages[_selectedPage]['title']),
       ),
+      drawer: SideMenu(),
       body: _pages[_selectedPage]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _onChangePages,
