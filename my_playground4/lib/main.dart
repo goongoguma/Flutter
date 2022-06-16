@@ -1,3 +1,6 @@
+import 'package:my_playground4/dummy/dummy.dart';
+
+import './models/meal.dart';
 import 'package:flutter/material.dart';
 import 'package:my_playground4/widgets/favorites.dart';
 import 'package:my_playground4/widgets/grid_item_detail_item.dart';
@@ -9,10 +12,53 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  List<Meal> meals = DUMMY_MEALS;
+
+  Map<String, bool> _filters = {
+    'isGlutenFree': false,
+    'isVegan': false,
+    'isVegetarian': false,
+    'isLactosFree': false,
+  };
+
+  void _setFilters(filters) {
+    setState(() {
+      meals = DUMMY_MEALS.where((meal) {
+        if (filters['isGlutenFree'] as bool && meal.isGlutenFree) {
+          return true;
+        }
+        if (filters['isVegan'] as bool && meal.isVegan) {
+          return true;
+        }
+        if (filters['isVegetarian'] as bool && meal.isVegetarian) {
+          return true;
+        }
+        if (filters['isLactosFree'] as bool && meal.isLactoseFree) {
+          return true;
+        }
+        return false;
+      }).toList();
+    });
+  }
+
+  void onClickChange(value, newValue) {
+    setState(() {
+      value = newValue;
+    });
+  }
+
+  // meals를 GridItemDetailList에 전달해야함
   @override
   Widget build(BuildContext context) {
+    print(meals);
     return MaterialApp(
       title: 'My Playground 4',
       theme: ThemeData(
@@ -26,7 +72,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => Tabs(),
         GridItemDetailList.routeName: (context) => GridItemDetailList(),
         GridItemDetailItem.routeName: (context) => GridItemDetailItem(),
-        Filter.routeName: (context) => Filter(),
+        Filter.routeName: (context) => Filter(_filters, _setFilters),
       },
     );
   }

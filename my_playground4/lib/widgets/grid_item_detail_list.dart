@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:my_playground4/widgets/grid_item_detail.dart';
+import 'package:my_playground4/widgets/grid_item_detail_item.dart';
 import '../dummy/dummy.dart';
 import '../models/meal.dart';
 
 // 'id: ${routeProps['id']}, title: ${routeProps['title']}, color: ${routeProps['color']}',
 class GridItemDetailList extends StatefulWidget {
   static const routeName = '/grid-item-detail';
+
   @override
   State<GridItemDetailList> createState() => _GridItemDetailListState();
 }
