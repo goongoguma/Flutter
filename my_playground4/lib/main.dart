@@ -49,16 +49,15 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void onClickChange(value, newValue) {
+  void onChangeFilter(newFilter) {
     setState(() {
-      value = newValue;
+      _filters = newFilter;
     });
   }
 
   // meals를 GridItemDetailList에 전달해야함
   @override
   Widget build(BuildContext context) {
-    print(meals);
     return MaterialApp(
       title: 'My Playground 4',
       theme: ThemeData(
@@ -70,9 +69,10 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => Tabs(),
-        GridItemDetailList.routeName: (context) => GridItemDetailList(),
+        GridItemDetailList.routeName: (context) => GridItemDetailList(meals),
         GridItemDetailItem.routeName: (context) => GridItemDetailItem(),
-        Filter.routeName: (context) => Filter(_filters, _setFilters),
+        Filter.routeName: (context) =>
+            Filter(_filters, _setFilters, onChangeFilter),
       },
     );
   }

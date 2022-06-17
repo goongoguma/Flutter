@@ -6,23 +6,18 @@ class Filter extends StatefulWidget {
   static const routeName = '/filters';
   Map<String, bool> filters;
   void Function(Map<String, bool>) setFilters;
+  void Function(Map<String, bool>) onChangeFilter;
 
-  Filter(this.filters, this.setFilters);
+  Filter(this.filters, this.setFilters, this.onChangeFilter);
 
   @override
   State<Filter> createState() => _FilterState();
 }
 
 class _FilterState extends State<Filter> {
-  var _filterState = {};
-
-  @override
-  initState() {
-    _filterState = widget.filters;
-  }
-
   Widget _buildSwitchFilter(
       String title, String subtitle, bool value, void Function(bool) onChange) {
+    print(value);
     return Container(
       child: SwitchListTile(
           title: Text(title),
@@ -37,7 +32,6 @@ class _FilterState extends State<Filter> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Filter'),
-          actions: [IconButton(onPressed: () {}, icon: Icon(Icons.save))],
         ),
         drawer: SideMenu(),
         body: Column(
@@ -50,44 +44,54 @@ class _FilterState extends State<Filter> {
               ),
             ),
             _buildSwitchFilter('Gluten-free', 'Gluten-free filter',
-                _filterState['isGlutenFree'] as bool, (newValue) {
-              setState(() {
-                _filterState = {
-                  ..._filterState,
-                  'isGlutenFree': newValue,
-                };
-              });
+                widget.filters['isGlutenFree'] as bool, (newValue) {
               widget.setFilters({
-                ..._filterState,
+                ...widget.filters,
+                'isGlutenFree': newValue,
+              });
+              widget.onChangeFilter({
+                ...widget.filters,
                 'isGlutenFree': newValue,
               });
             }),
             _buildSwitchFilter('Lactos-free', 'Lactos-free filter',
-                _filterState['isLactosFree'] as bool, (newValue) {
+                widget.filters['isLactosFree'] as bool, (newValue) {
               setState(() {
-                _filterState = {
-                  ..._filterState,
+                widget.filters = {
+                  ...widget.filters,
                   'isLactosFree': newValue,
                 };
               });
+              widget.onChangeFilter({
+                ...widget.filters,
+                'isLactosFree': newValue,
+              });
             }),
             _buildSwitchFilter('Vegetarian', 'Vegetarian filter',
-                _filterState['isVegetarian'] as bool, (newValue) {
+                widget.filters['isVegetarian'] as bool, (newValue) {
               setState(() {
-                _filterState = {
-                  ..._filterState,
+                widget.filters = {
+                  ...widget.filters,
                   'isVegetarian': newValue,
                 };
               });
+              widget.onChangeFilter({
+                ...widget.filters,
+                'isVegetarian': newValue,
+              });
             }),
             _buildSwitchFilter(
-                'Vegan', 'Vegan filter', _filterState['isVegan'] as bool,
+                'Vegan', 'Vegan filter', widget.filters['isVegan'] as bool,
                 (newValue) {
               setState(() {
-                _filterState = {
-                  ..._filterState,
+                widget.filters = {
+                  ...widget.filters,
                   'isVegan': newValue,
                 };
+              });
+              widget.onChangeFilter({
+                ...widget.filters,
+                'isVegan': newValue,
               });
             }),
           ],
