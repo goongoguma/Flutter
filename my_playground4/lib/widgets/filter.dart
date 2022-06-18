@@ -17,7 +17,6 @@ class Filter extends StatefulWidget {
 class _FilterState extends State<Filter> {
   Widget _buildSwitchFilter(
       String title, String subtitle, bool value, void Function(bool) onChange) {
-    print(value);
     return Container(
       child: SwitchListTile(
           title: Text(title),
@@ -56,11 +55,9 @@ class _FilterState extends State<Filter> {
             }),
             _buildSwitchFilter('Lactos-free', 'Lactos-free filter',
                 widget.filters['isLactosFree'] as bool, (newValue) {
-              setState(() {
-                widget.filters = {
-                  ...widget.filters,
-                  'isLactosFree': newValue,
-                };
+              widget.setFilters({
+                ...widget.filters,
+                'isLactosFree': newValue,
               });
               widget.onChangeFilter({
                 ...widget.filters,
@@ -69,11 +66,9 @@ class _FilterState extends State<Filter> {
             }),
             _buildSwitchFilter('Vegetarian', 'Vegetarian filter',
                 widget.filters['isVegetarian'] as bool, (newValue) {
-              setState(() {
-                widget.filters = {
-                  ...widget.filters,
-                  'isVegetarian': newValue,
-                };
+              widget.setFilters({
+                ...widget.filters,
+                'isVegetarian': newValue,
               });
               widget.onChangeFilter({
                 ...widget.filters,
@@ -83,11 +78,9 @@ class _FilterState extends State<Filter> {
             _buildSwitchFilter(
                 'Vegan', 'Vegan filter', widget.filters['isVegan'] as bool,
                 (newValue) {
-              setState(() {
-                widget.filters = {
-                  ...widget.filters,
-                  'isVegan': newValue,
-                };
+              widget.setFilters({
+                ...widget.filters,
+                'isVegan': newValue,
               });
               widget.onChangeFilter({
                 ...widget.filters,

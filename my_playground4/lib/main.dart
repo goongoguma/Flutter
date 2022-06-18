@@ -30,6 +30,7 @@ class _MyAppState extends State<MyApp> {
   };
 
   void _setFilters(filters) {
+    print(filters);
     setState(() {
       meals = DUMMY_MEALS.where((meal) {
         if (filters['isGlutenFree'] as bool && meal.isGlutenFree) {

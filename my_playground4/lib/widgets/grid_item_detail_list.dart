@@ -4,26 +4,32 @@ import 'package:my_playground4/widgets/grid_item_detail_item.dart';
 import '../dummy/dummy.dart';
 import '../models/meal.dart';
 
-// 'id: ${routeProps['id']}, title: ${routeProps['title']}, color: ${routeProps['color']}',
 class GridItemDetailList extends StatefulWidget {
   static const routeName = '/grid-item-detail';
+  List<Meal> meals;
+
+  GridItemDetailList(this.meals);
 
   @override
   State<GridItemDetailList> createState() => _GridItemDetailListState();
 }
 
 class _GridItemDetailListState extends State<GridItemDetailList> {
-  List<Meal> _filteredMeals = DUMMY_MEALS;
+  List<Meal> _filteredMeals = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, Object>;
-    setState(() {
-      _filteredMeals = DUMMY_MEALS
-          .where((meal) => meal.categories.contains(routeArgs['id']))
-          .toList();
-    });
+    _filteredMeals = widget.meals
+        .where((meal) => meal.categories.contains(routeArgs['id']))
+        .toList();
 
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
