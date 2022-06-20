@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import '../models/meal.dart';
 import '../widgets/grid_item_detail_item.dart';
@@ -46,8 +48,9 @@ class GridItemDetail extends StatelessWidget {
   }
 
   void onClickMeal(BuildContext context) {
-    Navigator.of(context)
-        .pushNamed(GridItemDetailItem.routeName, arguments: id);
+    Navigator.of(context).pushNamed(GridItemDetailItem.routeName, arguments: {
+      'id': id,
+    });
   }
 
   @override

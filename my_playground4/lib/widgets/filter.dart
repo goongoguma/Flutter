@@ -6,9 +6,8 @@ class Filter extends StatefulWidget {
   static const routeName = '/filters';
   Map<String, bool> filters;
   void Function(Map<String, bool>) setFilters;
-  void Function(Map<String, bool>) onChangeFilter;
 
-  Filter(this.filters, this.setFilters, this.onChangeFilter);
+  Filter(this.filters, this.setFilters);
 
   @override
   State<Filter> createState() => _FilterState();
@@ -48,18 +47,10 @@ class _FilterState extends State<Filter> {
                 ...widget.filters,
                 'isGlutenFree': newValue,
               });
-              widget.onChangeFilter({
-                ...widget.filters,
-                'isGlutenFree': newValue,
-              });
             }),
             _buildSwitchFilter('Lactos-free', 'Lactos-free filter',
                 widget.filters['isLactosFree'] as bool, (newValue) {
               widget.setFilters({
-                ...widget.filters,
-                'isLactosFree': newValue,
-              });
-              widget.onChangeFilter({
                 ...widget.filters,
                 'isLactosFree': newValue,
               });
@@ -70,19 +61,11 @@ class _FilterState extends State<Filter> {
                 ...widget.filters,
                 'isVegetarian': newValue,
               });
-              widget.onChangeFilter({
-                ...widget.filters,
-                'isVegetarian': newValue,
-              });
             }),
             _buildSwitchFilter(
                 'Vegan', 'Vegan filter', widget.filters['isVegan'] as bool,
                 (newValue) {
               widget.setFilters({
-                ...widget.filters,
-                'isVegan': newValue,
-              });
-              widget.onChangeFilter({
                 ...widget.filters,
                 'isVegan': newValue,
               });

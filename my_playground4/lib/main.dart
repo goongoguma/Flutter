@@ -21,6 +21,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Meal> meals = DUMMY_MEALS;
+  List<String> _favoriteMeals = [];
 
   Map<String, bool> _filters = {
     'isGlutenFree': false,
@@ -30,19 +31,21 @@ class _MyAppState extends State<MyApp> {
   };
 
   void _setFilters(filters) {
-    print(filters);
+    setState(() {
+      _filters = filters;
+    });
     setState(() {
       meals = DUMMY_MEALS.where((meal) {
-        if (filters['isGlutenFree'] as bool && meal.isGlutenFree) {
+        if (filters['isGlutenFree'] && meal.isGlutenFree) {
           return true;
         }
-        if (filters['isVegan'] as bool && meal.isVegan) {
+        if (filters['isVegan'] && meal.isVegan) {
           return true;
         }
-        if (filters['isVegetarian'] as bool && meal.isVegetarian) {
+        if (filters['isVegetarian'] && meal.isVegetarian) {
           return true;
         }
-        if (filters['isLactosFree'] as bool && meal.isLactoseFree) {
+        if (filters['isLactosFree'] && meal.isLactoseFree) {
           return true;
         }
         return false;
@@ -50,30 +53,39 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  void onChangeFilter(newFilter) {
-    setState(() {
-      _filters = newFilter;
-    });
+  void _setFavorite(String id) {
+    if (_favoriteMeals.contains(id)) {
+      setState(() {
+        _favoriteMeals =
+            _favoriteMeals.where((mealId) => mealId != id).toList();
+      });
+    } else {
+      setState(() {
+        _favoriteMeals = [..._favoriteMeals, id];
+      });
+    }
   }
 
   // meals를 GridItemDetailList에 전달해야함
   @override
   Widget build(BuildContext context) {
+    print('main');
+    print(_favoriteMeals);
     return MaterialApp(
       title: 'My Playground 4',
       theme: ThemeData(
-        canvasColor: Color.fromARGB(249, 220, 224, 220),
+        canvasColor: Color.fromARGB(248, 58, 95, 58),
         // brightness: Brightness.dark),
       ).copyWith(
           colorScheme: ThemeData().colorScheme.copyWith(
               primary: Colors.deepOrange, secondary: Colors.orangeAccent)),
       initialRoute: '/',
       routes: {
-        '/': (context) => Tabs(),
+        '/': (context) => Tabs(_favoriteMeals),
         GridItemDetailList.routeName: (context) => GridItemDetailList(meals),
-        GridItemDetailItem.routeName: (context) => GridItemDetailItem(),
-        Filter.routeName: (context) =>
-            Filter(_filters, _setFilters, onChangeFilter),
+        GridItemDetailItem.routeName: (context) =>
+            GridItemDetailItem(_favoriteMeals, _setFavorite),
+        Filter.routeName: (context) => Filter(_filters, _setFilters),
       },
     );
   }

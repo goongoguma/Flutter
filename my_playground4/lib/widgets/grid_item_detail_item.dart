@@ -4,6 +4,10 @@ import '../models/meal.dart';
 
 class GridItemDetailItem extends StatefulWidget {
   static const routeName = '/grid-item-detail-item';
+  final Function setFavorite;
+  List<String> favoriteMeals;
+
+  GridItemDetailItem(this.favoriteMeals, this.setFavorite);
 
   @override
   State<GridItemDetailItem> createState() => _GridItemDetailItemState();
@@ -15,10 +19,11 @@ class _GridItemDetailItemState extends State<GridItemDetailItem> {
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
-    final id = ModalRoute.of(context)!.settings.arguments as String;
+    final routeArgsId =
+        (ModalRoute.of(context)!.settings.arguments as Map)['id'] as String;
     setState(() {
       selectedMeal =
-          DUMMY_MEALS.firstWhere((element) => element.id == id) as Meal;
+          DUMMY_MEALS.firstWhere((element) => element.id == routeArgsId);
     });
     super.didChangeDependencies();
   }
@@ -98,9 +103,10 @@ class _GridItemDetailItemState extends State<GridItemDetailItem> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.favorite),
-        onPressed: () {},
-      ),
+          child: Icon(widget.favoriteMeals.contains(selectedMeal.id)
+              ? Icons.favorite
+              : Icons.favorite_border),
+          onPressed: () => widget.setFavorite(selectedMeal.id)),
     );
   }
 }

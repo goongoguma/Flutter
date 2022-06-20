@@ -28,19 +28,19 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _filters = filterData;
       _availableMeals = DUMMY_MEALS.where((meal) {
-        if (_filters['gluten']! && !meal.isGlutenFree) {
-          return false;
+        if (_filters['gluten']! && meal.isGlutenFree) {
+          return true;
         }
-        if (_filters['lactose']! && !meal.isLactoseFree) {
-          return false;
+        if (_filters['lactose']! && meal.isLactoseFree) {
+          return true;
         }
-        if (_filters['vegan']! && !meal.isVegan) {
-          return false;
+        if (_filters['vegan']! && meal.isVegan) {
+          return true;
         }
-        if (_filters['vegetarian']! && !meal.isVegetarian) {
-          return false;
+        if (_filters['vegetarian']! && meal.isVegetarian) {
+          return true;
         }
-        return true;
+        return false;
       }).toList();
     });
   }
@@ -66,6 +66,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    print(_favoriteMeals);
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(

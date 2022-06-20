@@ -9,6 +9,7 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(favoriteMeals);
     if (favoriteMeals.isEmpty) {
       return Center(
         child: Text('You have no favoirtes yet - start adding some!'),

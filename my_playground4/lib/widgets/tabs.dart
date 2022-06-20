@@ -5,19 +5,27 @@ import '../widgets/favorites.dart';
 import './side_menu.dart';
 
 class Tabs extends StatefulWidget {
-  const Tabs({Key? key}) : super(key: key);
+  List<String> favoriteMeals;
+
+  Tabs(this.favoriteMeals);
 
   @override
   State<Tabs> createState() => _TabsState();
 }
 
 class _TabsState extends State<Tabs> {
-  final List<Map<String, dynamic>> _pages = [
-    {'page': Home(), 'title': 'Home'},
-    {'page': Favorites(), 'title': 'Favorites'}
-  ];
-
+  late List<Map<String, dynamic>> _pages;
   int _selectedPage = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    _pages = [
+      {'page': Home(), 'title': 'Home'},
+      {'page': Favorites(widget.favoriteMeals), 'title': 'Favorites'}
+    ];
+    super.initState();
+  }
 
   void _onChangePages(int index) {
     setState(() {
@@ -27,6 +35,7 @@ class _TabsState extends State<Tabs> {
 
   @override
   Widget build(BuildContext context) {
+    // print(widget.favoriteMeals);
     return Scaffold(
       appBar: AppBar(
         title: Text(_pages[_selectedPage]['title']),
