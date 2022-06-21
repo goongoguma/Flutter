@@ -20,7 +20,6 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    print(widget.favoriteMeals);
     _pages = [
       {'page': CategoriesScreen(), 'title': 'Categories'},
       {'page': FavoritesScreen(widget.favoriteMeals), 'title': 'Your Favorite'}

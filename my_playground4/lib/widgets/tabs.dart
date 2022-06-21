@@ -3,9 +3,10 @@ import 'package:my_playground4/widgets/grid_item.dart';
 import 'package:my_playground4/widgets/home.dart';
 import '../widgets/favorites.dart';
 import './side_menu.dart';
+import 'package:my_playground4/dummy/dummy.dart';
 
 class Tabs extends StatefulWidget {
-  List<String> favoriteMeals;
+  final List<String> favoriteMeals;
 
   Tabs(this.favoriteMeals);
 
@@ -20,11 +21,11 @@ class _TabsState extends State<Tabs> {
   @override
   void initState() {
     // TODO: implement initState
+    super.initState();
     _pages = [
       {'page': Home(), 'title': 'Home'},
       {'page': Favorites(widget.favoriteMeals), 'title': 'Favorites'}
     ];
-    super.initState();
   }
 
   void _onChangePages(int index) {
@@ -35,7 +36,6 @@ class _TabsState extends State<Tabs> {
 
   @override
   Widget build(BuildContext context) {
-    // print(widget.favoriteMeals);
     return Scaffold(
       appBar: AppBar(
         title: Text(_pages[_selectedPage]['title']),

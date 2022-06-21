@@ -56,12 +56,11 @@ class _MyAppState extends State<MyApp> {
   void _setFavorite(String id) {
     if (_favoriteMeals.contains(id)) {
       setState(() {
-        _favoriteMeals =
-            _favoriteMeals.where((mealId) => mealId != id).toList();
+        _favoriteMeals.remove(id);
       });
     } else {
       setState(() {
-        _favoriteMeals = [..._favoriteMeals, id];
+        _favoriteMeals.add(id);
       });
     }
   }
@@ -69,17 +68,15 @@ class _MyAppState extends State<MyApp> {
   // meals를 GridItemDetailList에 전달해야함
   @override
   Widget build(BuildContext context) {
-    print('main');
-    print(_favoriteMeals);
     return MaterialApp(
       title: 'My Playground 4',
       theme: ThemeData(
-        canvasColor: Color.fromARGB(248, 58, 95, 58),
+        canvasColor: Color.fromARGB(248, 207, 214, 207),
         // brightness: Brightness.dark),
       ).copyWith(
           colorScheme: ThemeData().colorScheme.copyWith(
               primary: Colors.deepOrange, secondary: Colors.orangeAccent)),
-      initialRoute: '/',
+      // initialRoute: '/',
       routes: {
         '/': (context) => Tabs(_favoriteMeals),
         GridItemDetailList.routeName: (context) => GridItemDetailList(meals),
