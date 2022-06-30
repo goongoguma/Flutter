@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
+      // 새로운 클래스의 인스턴스를 만들때는 create 사용을 권장
       create: (ctx) => Products(),
       child: MaterialApp(
         title: 'My Shop',
