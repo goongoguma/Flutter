@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_shopping/provider/cart.dart';
 import 'package:provider/provider.dart';
 import '../screens/product_detail_screen.dart';
 import '../provider/product.dart';
@@ -7,6 +8,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // static한 상태와 같이 재렌더링이 필요 없을 경우 Provider.of의 listen: false를 사용하는것을 권장
+    final cart = Provider.of<Cart>(context, listen: false);
     return Consumer<Product>(
       builder: (ctx, product, _) => ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -37,7 +39,9 @@ class ProductItem extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                cart.addItem(product.id, product.price, product.title);
+              },
               icon: Icon(Icons.shopping_cart),
               color: Theme.of(context).accentColor,
             ),
