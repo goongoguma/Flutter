@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import './screens/products_overview_screen.dart';
 import './screens/product_detail_screen.dart';
 import './provider/products.dart';
+import './provider/cart.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +15,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      // 새로운 클래스의 인스턴스를 만들때는 create 사용을 권장
-      create: (ctx) => Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          // 새로운 클래스의 인스턴스를 만들때는 create 사용을 권장
+          create: (ctx) => Products(),
+        ),
+        ChangeNotifierProvider(create: (ctx) => Cart())
+      ],
       child: MaterialApp(
         title: 'My Shop',
         theme: ThemeData(
