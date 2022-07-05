@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_shopping/provider/cart.dart';
 import 'package:flutter_project_shopping/provider/products.dart';
+import 'package:flutter_project_shopping/screens/cart_screen.dart';
 import 'package:provider/provider.dart';
 import '../provider/product.dart';
 import '../widgets/products_grid.dart';
 import '../widgets/badge.dart';
+import './cart_screen.dart';
 import '../provider/cart.dart';
 
 enum FilterOptions {
@@ -58,7 +60,9 @@ class _ProduceOverviewScreenState extends State<ProduceOverviewScreen> {
               ),
               child: IconButton(
                 icon: Icon(Icons.shopping_cart),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(CartScreen.routeName);
+                },
               ),
             )
           ],
