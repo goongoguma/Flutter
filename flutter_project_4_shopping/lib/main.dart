@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_shopping/provider/orders.dart';
 import 'package:flutter_project_shopping/screens/cart_screen.dart';
 import 'package:provider/provider.dart';
 import './screens/products_overview_screen.dart';
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
           // 새로운 클래스의 인스턴스를 만들때는 create 사용을 권장
           create: (ctx) => Products(),
         ),
-        ChangeNotifierProvider(create: (ctx) => Cart())
+        ChangeNotifierProvider(create: (ctx) => Cart()),
+        ChangeNotifierProvider(create: (ctx) => Orders())
       ],
       child: MaterialApp(
         title: 'My Shop',
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
         home: ProduceOverviewScreen(),
         routes: {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-          CartScreen.routeName: (context) => CartScreen()
+          CartScreen.routeName: (context) => CartScreen(),
         },
       ),
     );
