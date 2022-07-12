@@ -1,15 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:my_playground6/provider/product.dart';
+import 'package:provider/provider.dart';
+import '../provider/product.dart';
 
 class ProductItem extends StatelessWidget {
-  final Product item;
-
-  ProductItem(this.item);
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(item.title),
+    return Consumer<Product>(
+      builder: (context, value, _) => ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: GestureDetector(
+          onTap: () {},
+          child: GridTile(
+            child: Image.network(
+              value.imageUrl,
+            ),
+            footer: GridTileBar(
+              leading: IconButton(
+                onPressed: () => value.onChangeFavorite(),
+                icon: value.isFavorite
+                    ? Icon(Icons.favorite)
+                    : Icon(Icons.favorite_border),
+              ),
+              title: Text(
+                value.title,
+                textAlign: TextAlign.center,
+              ),
+              trailing: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.shopping_bag),
+              ),
+              backgroundColor: Colors.black54,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
