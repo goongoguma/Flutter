@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_playground6/screens/favorite_screen.dart';
 import 'package:my_playground6/screens/home_screen.dart';
+import '../widgets/badge.dart';
 
 class TabsScreen extends StatefulWidget {
   @override
@@ -17,7 +18,10 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_pages[_selectedIndex]['title'])),
+      appBar: AppBar(
+        title: Text(_pages[_selectedIndex]['title']),
+        // actions: <Widget>[Badge(child: child as Widget,)],
+      ),
       body: _pages[_selectedIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
