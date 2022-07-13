@@ -8,22 +8,20 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final products = Provider.of<Products>(context);
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Main Page'),
-          backgroundColor: Theme.of(context).colorScheme.primary,
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: GridView.builder(
+        itemCount: products.productCount,
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+            childAspectRatio: 3 / 2,
+            crossAxisSpacing: 20,
+            mainAxisSpacing: 20),
+        itemBuilder: (context, index) => ChangeNotifierProvider.value(
+          value: products.items[index],
+          child: ProductItem(),
         ),
-        body: GridView.builder(
-          itemCount: products.productCount,
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              childAspectRatio: 3 / 2,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20),
-          itemBuilder: (context, index) => ChangeNotifierProvider.value(
-            value: products.items[index],
-            child: ProductItem(),
-          ),
-        ));
+      ),
+    );
   }
 }

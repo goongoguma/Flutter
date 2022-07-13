@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_playground6/provider/products.dart';
+import 'package:my_playground6/screens/tabs_screen.dart';
 import 'package:provider/provider.dart';
 import './screens/home_screen.dart';
 
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             colorScheme: ColorScheme.fromSwatch()
                 .copyWith(primary: Colors.brown, secondary: Colors.blueGrey)),
-        home: HomeScreen(),
+        // home: HomeScreen(),
+        routes: {'/': (context) => TabsScreen()},
       ),
     );
   }

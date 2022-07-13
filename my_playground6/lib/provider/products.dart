@@ -45,4 +45,19 @@ class Products with ChangeNotifier {
   int get productCount {
     return _products.length;
   }
+
+  List<Product> get favoriteItems {
+    return [..._products]
+        .where((element) => element.isFavorite == true)
+        .toList();
+  }
+
+  void addFavorite(favoriteEl) {
+    if (favoriteItems.contains(favoriteEl.id)) {
+      favoriteItems.removeWhere((item) => item.id == favoriteEl.id);
+    } else {
+      favoriteItems.add(favoriteEl);
+    }
+    notifyListeners();
+  }
 }

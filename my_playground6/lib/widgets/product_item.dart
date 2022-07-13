@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:my_playground6/provider/product.dart';
 import 'package:provider/provider.dart';
 import '../provider/product.dart';
+import '../provider/products.dart';
 
 class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final products = Provider.of<Products>(context);
     return Consumer<Product>(
       builder: (context, value, _) => ClipRRect(
         borderRadius: BorderRadius.circular(10),
@@ -17,7 +19,10 @@ class ProductItem extends StatelessWidget {
             ),
             footer: GridTileBar(
               leading: IconButton(
-                onPressed: () => value.onChangeFavorite(),
+                onPressed: () {
+                  value.onChangeFavorite();
+                  products.addFavorite(value);
+                },
                 icon: value.isFavorite
                     ? Icon(Icons.favorite)
                     : Icon(Icons.favorite_border),
