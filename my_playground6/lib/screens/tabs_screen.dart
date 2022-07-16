@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_playground6/screens/favorite_screen.dart';
 import 'package:my_playground6/screens/home_screen.dart';
 import '../widgets/badge.dart';
+import 'package:provider/provider.dart';
+import '../provider/cart.dart';
 
 class TabsScreen extends StatefulWidget {
   @override
@@ -18,10 +20,17 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_pages[_selectedIndex]['title']),
-        // actions: <Widget>[Badge(child: child as Widget,)],
-      ),
+      appBar: AppBar(title: Text(_pages[_selectedIndex]['title']), actions: [
+        // builder안의 child는 Consumer의 child임
+        Consumer<Cart>(
+          builder: (_, cartObj, child) => Badge(
+            child: child as Widget,
+            value: cartObj.itemCount.toString(),
+          ),
+          child: IconButton(
+              onPressed: () {}, icon: Icon(Icons.shopping_bag_rounded)),
+        )
+      ]),
       body: _pages[_selectedIndex]['page'],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
