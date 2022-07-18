@@ -4,6 +4,7 @@ import 'package:my_playground6/provider/products.dart';
 import 'package:my_playground6/screens/tabs_screen.dart';
 import 'package:provider/provider.dart';
 import './screens/home_screen.dart';
+import './screens/cart_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +30,10 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSwatch()
                 .copyWith(primary: Colors.brown, secondary: Colors.blueGrey)),
         // home: HomeScreen(),
-        routes: {'/': (context) => TabsScreen()},
+        routes: {
+          '/': (context) => TabsScreen(),
+          CartScreen.routeName: (ctx) => CartScreen()
+        },
       ),
     );
   }

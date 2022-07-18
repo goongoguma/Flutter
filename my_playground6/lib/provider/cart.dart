@@ -21,19 +21,29 @@ class Cart with ChangeNotifier {
     return {..._items};
   }
 
-  int get itemCount {
-    return _items.length;
+  int get itemTotalCount {
+    int count = 0;
+    for (var key in items.keys) {
+      count += items[key]!.quantity;
+    }
+    return count;
   }
 
   void addItem(String productId, String title, double price) {
     var uuid = Uuid();
-    // 여기서부터.. (아이템 추가가 안됨)
     bool existProductId = _items.containsKey(productId);
     if (!existProductId) {
-      _items["prodcutId"] =
+      _items[productId] =
           CartItem(id: uuid.v4(), title: title, price: price, quantity: 1);
     } else {
-      _items["productId"]!.quantity = _items["productId"]!.quantity + 1;
+      _items.update(
+          productId,
+          (value) => CartItem(
+              id: value.id,
+              title: value.title,
+              price: value.price,
+              quantity: value.quantity + 1));
     }
+    notifyListeners();
   }
 }

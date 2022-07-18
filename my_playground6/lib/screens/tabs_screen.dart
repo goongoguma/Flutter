@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_playground6/screens/cart_screen.dart';
 import 'package:my_playground6/screens/favorite_screen.dart';
 import 'package:my_playground6/screens/home_screen.dart';
 import '../widgets/badge.dart';
@@ -25,10 +26,12 @@ class _TabsScreenState extends State<TabsScreen> {
         Consumer<Cart>(
           builder: (_, cartObj, child) => Badge(
             child: child as Widget,
-            value: cartObj.itemCount.toString(),
+            value: cartObj.itemTotalCount.toString(),
           ),
           child: IconButton(
-              onPressed: () {}, icon: Icon(Icons.shopping_bag_rounded)),
+              onPressed: () =>
+                  Navigator.of(context).pushNamed(CartScreen.routeName),
+              icon: Icon(Icons.shopping_bag_rounded)),
         )
       ]),
       body: _pages[_selectedIndex]['page'],
