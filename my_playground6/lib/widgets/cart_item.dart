@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../provider/cart.dart';
+import '../widgets/button_item.dart';
 
 class CartItem extends StatelessWidget {
   final String id;
@@ -9,7 +10,12 @@ class CartItem extends StatelessWidget {
   final int quantity;
   final String title;
 
-  CartItem(this.id, this.productId, this.price, this.quantity, this.title);
+  CartItem(
+      {required this.id,
+      required this.productId,
+      required this.price,
+      required this.quantity,
+      required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -23,26 +29,38 @@ class CartItem extends StatelessWidget {
           size: 40,
         ),
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(right: 20),
-        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+        padding: const EdgeInsets.only(right: 20),
+        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
       ),
       direction: DismissDirection.endToStart,
       onDismissed: (direction) => {},
       child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+        margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: ListTile(
             leading: CircleAvatar(
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 child: Padding(
-              padding: EdgeInsets.all(5),
-              child: FittedBox(
-                child: Text('\$${price}'),
-              ),
-            )),
+                  padding: const EdgeInsets.all(5),
+                  child: FittedBox(
+                    child: Text(
+                      '\$${price}',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )),
             title: Text(title),
             subtitle: Text('Total: \$${(price * quantity)}'),
-            trailing: Text('$quantity x'),
+            trailing: Container(
+              child: Column(
+                children: [
+                  ButtonItem('add'),
+                  Text('$quantity x'),
+                  ButtonItem('remove')
+                ],
+              ),
+            ),
           ),
         ),
       ),
