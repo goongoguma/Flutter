@@ -19,6 +19,7 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context);
     return Dismissible(
       key: ValueKey(id),
       background: Container(
@@ -33,7 +34,7 @@ class CartItem extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
       ),
       direction: DismissDirection.endToStart,
-      onDismissed: (direction) => {},
+      onDismissed: (direction) => cart.clearItem(productId),
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
         child: Padding(
@@ -55,9 +56,9 @@ class CartItem extends StatelessWidget {
             trailing: Container(
               child: Column(
                 children: [
-                  ButtonItem('add'),
+                  ButtonItem('add', productId),
                   Text('$quantity x'),
-                  ButtonItem('remove')
+                  ButtonItem('remove', productId)
                 ],
               ),
             ),

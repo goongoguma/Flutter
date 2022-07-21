@@ -7,7 +7,7 @@ class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
   @override
   Widget build(BuildContext context) {
-    final cartItem = Provider.of<Cart>(context).items;
+    final cart = Provider.of<Cart>(context);
     return Scaffold(
         appBar: AppBar(title: const Text('Cart')),
         body: Column(
@@ -28,16 +28,16 @@ class CartScreen extends StatelessWidget {
                     ),
                     const Spacer(),
                     Chip(
-                      label: const Text(
-                        'total amount',
-                        style: TextStyle(
+                      label: Text(
+                        '\$${cart.totalAmount}',
+                        style: const TextStyle(
                           color: Colors.white,
                         ),
                       ),
                       backgroundColor: Theme.of(context).colorScheme.primary,
                     ),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () => cart.clearItems(),
                         child: const Text('ORDER NOW!'),
                         style: TextButton.styleFrom(
                             primary: Theme.of(context).colorScheme.secondary))
@@ -50,13 +50,13 @@ class CartScreen extends StatelessWidget {
             ),
             Expanded(
                 child: ListView.builder(
-                    itemCount: cartItem.length,
+                    itemCount: cart.items.length,
                     itemBuilder: (context, index) => CartItem(
-                        productId: cartItem.keys.toList()[index],
-                        id: cartItem.values.toList()[index]!.id,
-                        title: cartItem.values.toList()[index]!.title,
-                        quantity: cartItem.values.toList()[index]!.quantity,
-                        price: cartItem.values.toList()[index]!.price)))
+                        productId: cart.items.keys.toList()[index],
+                        id: cart.items.values.toList()[index]!.id,
+                        title: cart.items.values.toList()[index]!.title,
+                        quantity: cart.items.values.toList()[index]!.quantity,
+                        price: cart.items.values.toList()[index]!.price)))
           ],
         ));
   }
