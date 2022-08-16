@@ -17,6 +17,9 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+//   final url = Uri.https('flutter-update.firebaseio.com', '/products.json')
+// http.post(url, ...)
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
