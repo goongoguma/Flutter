@@ -53,7 +53,7 @@ class Products with ChangeNotifier {
     return _items.where((prodItem) => prodItem.isFavorite).toList();
   }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) async {
     final url = Uri.https(
         'flutter-exercise-4b78d-default-rtdb.firebaseio.com', '/products.json');
     http
