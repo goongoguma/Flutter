@@ -92,7 +92,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (!isValid) {
       return;
     }
-    print('hello');
     _form.currentState!.save();
     if (_editedProduct.id != '') {
       Provider.of<Products>(context, listen: false)
