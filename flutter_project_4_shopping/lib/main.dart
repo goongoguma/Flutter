@@ -13,6 +13,8 @@ import './screens/edit_product_screen.dart';
 void main() {
   runApp(const MyApp());
 }
+// 테스트 이미지
+// https://3.bp.blogspot.com/_b0xJ7qk6DTc/TBH31EKfUPI/AAAAAAAAAqM/nvwdLmtlRIA/s320/Flower.jpg
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
